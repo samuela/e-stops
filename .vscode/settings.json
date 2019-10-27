@@ -1,0 +1,11 @@
+{
+  "python.formatting.provider": "yapf",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/._*": true
+  }
+}

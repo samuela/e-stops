@@ -1,0 +1,1 @@
+../../numpy/__init__.pyi

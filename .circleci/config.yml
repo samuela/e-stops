@@ -1,0 +1,40 @@
+---
+version: 2
+jobs:
+  build:
+    docker:
+      - image: samuela/research-ci
+
+    steps:
+      # The mujoco key is kept as a base64 encoded secret in circleci. This is
+      # actually necessary to build mujoco-py.
+      - run:
+          name: install mujoco key
+          command: echo $MUJOCO_LICENSE_KEY | base64 --decode > ~/.mujoco/mjkey.txt
+
+      - checkout
+      - restore_cache:
+          key: deps-{{ checksum "Pipfile.lock" }}
+      - run: pipenv install --dev
+      - save_cache:
+          key: deps-{{ checksum "Pipfile.lock" }}
+          paths:
+            - "/home/circleci/.local/share/virtualenvs/"
+      - run:
+          name: pyre
+          command: |
+            pipenv run pip freeze | grep pyre
+            pipenv run pyre --version
+            pipenv run pyre --search-path=$(pipenv --venv)/lib/python3.7/site-packages/ check
+      - run:
+          name: pylint
+          command: |
+            pipenv run pip freeze | grep pylint
+            pipenv run pylint --version
+            pipenv run pylint research
+      - run:
+          name: yapf
+          command: |
+            pipenv run pip freeze | grep yapf
+            pipenv run yapf --version
+            pipenv run yapf --exclude "**/.*" --diff --recursive .
