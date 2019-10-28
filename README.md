@@ -2,7 +2,7 @@
 
 ![e-stop diagram](diagram.png)
 
-Here lives the source code for "Mo' States Mo' Problems: Emergency Stop Mechanisms from Observation" by Samuel Ainsworth, Matt Barnes, and Siddhartha Srinivasa presented at NeurIPS 2019.
+Here lives the source code for "Mo' States Mo' Problems: Emergency Stop Mechanisms from Observation" by [Samuel Ainsworth](http://samlikes.pizza), [Matt Barnes](https://homes.cs.washington.edu/~mbarnes/), and [Siddhartha Srinivasa](https://goodrobot.ai) presented at NeurIPS 2019.
 
 ## Usage
 
